@@ -1,54 +1,59 @@
 {% extends 'blog/base.html' %}
 
 {% block head_title %}
-    {{ post.title }} - Blog
+    {{ post.title }} -Blog
 {% endblock %}
 
-{% block main_area %}
+{%  block main_area %}
     <div id="post-area">
-    <header class="mb-4">
-                        <!-- Post title-->
-                        <h1 class="fw-bolder mb-1">{{ post.title}}</h1>
-                        <h5 class="text-muted">{{ post.hook_text }}</h5>
-                        <p a class="lead">
-                            by
-                            <a href="#">작성자면 쓸 위치(개발예정)</a>
-                        </p>
-                        <!-- Post meta content-->
-                        <div class="text-muted fst-italic mb-2">{{ post.created_at }}</div>
+    <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
+                            <h5 class ="text-muted">{{ post.hook_text }}</h5>
+                              <!-- Post categories-->
+                            <p class="lead">
+                                by
+                                <a href="#">작성자명 쓸 위치(개발 예정)</a>
+                            </p>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">{{ post.created_at }}</div>
 
-                    </header>
-                    <!-- Preview image figure-->
-                    {% if post.head_image %}
-                        <img class="img-fluid rounded" src="{{ post.head_image.url }}" alt="{{ post.title }} head_image">
-                    {% else %}
-                        <image class="image-fluid rounded" src="https:picsum.photos/seed/{{ p.id }}/800/200" alt="random_image">
-                    {% endif %}
-                    <!-- Post content-->
-                    <section class="mb-5">
-                        <p class="fs-5 mb-4">{{ post.content }}</p>
 
-                        {% if post.file_upload %}
-                            <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button"download>Download:
+
+
+                        </header>
+                        <!-- Preview image figure-->
+                         {% if p.head_image %}
+                              <img class="img-fluid rounded" src="{{ post.head_image.url }}" alt ="{{ post.title }} head image">
+                                {% else %}
+                                    <img class="img-fluid rounded" src="http://picsum.photos/seed/{{ p.id }}/800/200" alt="random_image">
+                                {% endif %}
+                        <!-- Post content-->
+                        <section class="mb-5">
+                           <p>{{ post.content }} </p>
+                            {% if post.file_upload %}
+                                <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button">
+                                Download:
+
                                 {% if post.get_file_ext == 'csv' %}
-                                    <i class="fa-solid fa-file-csv"></i>"
+                                    <i class="fas fa-file-csv"></i>
                                 {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
-                                    <i class="fa-solid fa-file-excel"></i>
-                                {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc'%}
-                                    <i class="fa-light fa-file-word"></i>
+                                    <i class="fas fa-file-excel"></i>
+                                {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+                                    <i class="fas fa-file-word"></i>
                                 {% else %}
                                     <i class="far fa-file"></i>
-                                    {% endif %}
-                                {{ post.get_file_name }}
-                            </a>
-                        {% endif %}
-                    <hr>
-                    </div>
+                                 {% endif %}
+                               {{ post.get_file_name }}
+                                </a>
+                            {% endif %}
 
-                    <div id="comment-area">
-
-                    </section>
+                        </section>
+                                </div>
+                    </article>
                     <!-- Comments section-->
+    <div id="comment-area">
                     <section class="mb-5">
                         <div class="card bg-light">
                             <div class="card-body">
@@ -69,17 +74,7 @@
                                                 And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
                                             </div>
                                         </div>
-                                        <!-- Child comment 2-->
-                                        <div class="d-flex mt-4">
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                When you put money directly to a problem, it makes a good headline.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single comment-->
+  <!-- Single comment-->
                                 <div class="d-flex">
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                     <div class="ms-3">
@@ -89,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                    </section>
-                </image>
-    </div>
-{% endblock %}
+                            </div>
+                </div>
+                        </div>
+                        {% endblock %}
