@@ -17,9 +17,16 @@
                                 {% else %}
                                 <span class="badge badge-secondary float-right">미분류</span>
                                 {% endif %}
+                                {% if p.tags.exists %}
+                                    <i class="fas fa-tags"></i>
+                                    {% for tag in p.tags.iterator %}
+                                        <a href="{{ tag.get_absolute_url }}"><span class="badge badge-pill badge-light">{{ tag }}</span></a>
+                                    {% endfor %}
+                                    </br>
+                                    </br>
+                                {% endif %}
                                     <div class="card-footer text-muted">{{ p.created_at}}
                                     <a href="#">{{ p.author | upper }}</a>
-
                                     <h2 class="card-title h4">{{ p.title }}</h2>
                                     </div>
                                     {% if p.hook_text %}
@@ -29,7 +36,7 @@
                                     <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more →</a>
                                 </div>
                             </div>
-{%  endfor %}
+    {% endfor %}
                         {% else %}
                         <h3>아직 게시물이 없습니다.</h3>
                         {% endif  %}
