@@ -40,6 +40,35 @@ class TestView(TestCase):
         self.post_003.tags.add(self.tag_python_kor)
         self.post_003.tags.add(self.tag_python)
 
+    def test_create_post(self):
+        #로그인하지 않으면 status code 가 200이면 안된다.
+        response = self.client.get('/blog/create_post/')
+        self.assertNotEqual(response.status_code, 200)
+
+        #로그인을 한다
+        self.client.login(username='trump', password='somepassword')
+
+        response = self.client.get('/blog/create_post/')
+        self.assertEqual(response.status_code, 200)
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        self.assertEqual('Create Post - Blog', soup.title.text)
+        main_area = soup.find('div', id='main-area')
+        self.assertIn('Create New Post', main_area.text)
+
+        self.client.post(
+            '/blog/create_post/',
+            {
+                'title': 'Post Form 만들기',
+                'content': "Post Form 페이지를 만듭시다.",
+            }
+        )
+        self.assertEqual(Post.objects.count(), 4)
+        last_post = Post.objects.last()
+        self.assertEqual(last_post.title, "Post Form 만들기")
+        self.assertEqual(last_post.author.username, 'trump')
+
+
     def category_card_test(self, soup):
         categories_card = soup.find('div', id='categories-card')
         self.assertIn('Categories', categories_card.text)
@@ -143,13 +172,16 @@ class TestView(TestCase):
     def test_post_detail(self):
 
         self.assertEqual(self.post_001.get_absolute_url(), '/blog/1/')
+        author = self.user_trump, #
 
         response = self.client.get(self.post_001.get_absolute_url())
         self.assertEqual(response.status_code, 200)
         soup = BeautifulSoup(response.content, 'html.parser')
 
+
         self.navbar_test(soup)
         self.category_card_test(soup)
+
 
         self.assertIn(self.post_001.title, soup.title.text)
 
@@ -157,6 +189,7 @@ class TestView(TestCase):
         post_area = main_area.find('div', id='post-area')
         self.assertIn(self.post_001.title, post_area.text)
         self.assertIn(self.category_programming.name, post_area.text)
+        self.assertIn(self.user_trump.username.upper(), post_area.text) #
 
         self.assertIn(self.post_001.content, post_area.text)
 
