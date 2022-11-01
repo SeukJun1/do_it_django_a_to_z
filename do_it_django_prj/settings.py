@@ -30,8 +30,6 @@ if os.environ.get('DJANGO_ALLOWED_HOSTS'):
 else:
     ALLOWED_HOSTS = []
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
