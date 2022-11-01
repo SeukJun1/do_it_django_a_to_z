@@ -20,10 +20,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-*^f$g338l1o_sh+3y3rx838ib955#i3-!reg&=agpg_et+o-qy"
+SECRET_KEY = os.environ.get('SECRET_KEY', "django-insecure-*^f$g338l1o_sh+3y3rx838ib955#i3-!reg&=agpg_et+o-qy")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', 1))
+
+if os.environ.get('DJANGO_ALLOWED_HOSTS'):
+    ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
+else:
+    ALLOWED_HOSTS = []
 
 ALLOWED_HOSTS = []
 
@@ -146,12 +151,13 @@ AUTHENTICATION_BACKENDS = (
 
 )
 
-STIE_ID =1
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 LOGIN_REDIRECT_URL = '/blog/'
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
+SITE_ID = 1
 
 
 
