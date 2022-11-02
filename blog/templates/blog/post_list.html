@@ -1,5 +1,4 @@
 {% extends 'blog/base.html' %}
-
 {% block main_area %}
 
     {% if user.is_authenticated %}
@@ -35,7 +34,9 @@
                                     </br>
                                     </br>
                                 {% endif %}
+
                                     <div class="card-footer text-muted">{{ p.created_at}}
+
                                     <a href="#">{{ p.author | upper }}</a>
                                     <h2 class="card-title h4">{{ p.title }}</h2>
                                     </div>
@@ -75,5 +76,6 @@
                               </li>
                                 {% endif %}
                               </ul>
+
     {% endif %}
 {% endblock %}

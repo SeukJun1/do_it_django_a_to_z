@@ -22,4 +22,3 @@ services:
       - POSTGRES_DB=do_it_django_dev
 volumes:
   postgres_data:
-

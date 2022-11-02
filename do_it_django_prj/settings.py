@@ -31,6 +31,8 @@ else:
     ALLOWED_HOSTS = []
 
 
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -161,7 +163,6 @@ LOGIN_REDIRECT_URL = '/blog/'
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
 SITE_ID = 1
-
 
 
 
